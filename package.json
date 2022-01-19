@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "e2e"
+  ],
+  "scripts": {},
+  "engines": {
+    "node": "^16.13"
+  }
+}
