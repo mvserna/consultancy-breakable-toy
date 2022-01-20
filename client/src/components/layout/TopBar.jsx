@@ -1,16 +1,17 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import "./styles/top-bar.pcss";
+
+// Turn "Go to some other site" into a link to a site of your choosing
 
 export const TopBar = () => (
   <div className="top-bar">
-    <div className="top-bar-left">
-      <ul className="menu">
-        <li className="menu-text">App</li>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
-    </div>
+    <p className="top-bar__item">
+      <Link to="https://en.wikipedia.org/wiki/Squid">Squid Info</Link>
+    </p>
+    <p className="top-bar__item">
+      <Link to="/">Home</Link>
+    </p>
   </div>
 );

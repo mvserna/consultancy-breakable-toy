@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { TopBar } from "./layout/TopBar";
 import "../style/main.pcss";
+import { SquidIndexPage } from "./SquidIndexPage";
 
 const App = () => {
   /*
@@ -25,9 +26,7 @@ const App = () => {
       <Router>
         <TopBar />
         <Switch>
-          <Route exact path="/">
-            <h2>Hello from react</h2>
-          </Route>
+          <Route exact path="/" component={SquidIndexPage} />
         </Switch>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} />
