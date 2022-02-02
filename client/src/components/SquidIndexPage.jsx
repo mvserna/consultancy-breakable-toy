@@ -7,21 +7,30 @@ import { SquidTile } from "./SquidTile";
 import "./styles/squid-index.pcss";
 
 export const SquidIndexPage = () => {
-  const squidInfo = useQuery("squids", () => ApiClient.get("/squids").then((res) => res.data));
+  const {
+    data: squidData,
+    isLoading: isSquidQueryLoading,
+    isSuccess: isSquidQuerySuccess,
+  } = useQuery("squids", () => ApiClient.get("/squids").then((res) => res.data));
 
-  if (squidInfo.isSuccess) {
-    const squidComponents = squidInfo.data.squids.map((squid) => (
+  if (isSquidQueryLoading) {
+    return <h4>Standby while squids are summoned...</h4>;
+  }
+  if (isSquidQuerySuccess) {
+    const squidComponents = squidData.squids.map((squid) => (
       <SquidTile key={squid.id} squid={squid} />
     ));
     return (
-      <ul className="squid-table">
-        <li className="squid-table__header">Name</li>
-        <li className="squid-table__header">Species</li>
-        <li className="squid-table__header">Special Power</li>
-        <li className="squid-table__header">XP</li>
-        {squidComponents}
-      </ul>
+      <table className="squid-table">
+        <thead>
+          <th className="squid-table__header">Name</th>
+          <th className="squid-table__header">Species</th>
+          <th className="squid-table__header">Special Power</th>
+          <th className="squid-table__header">XP</th>
+        </thead>
+        <tbody>{squidComponents}</tbody>
+      </table>
     );
   }
-  return <h2>Hello from React!</h2>;
+  return <h4>Oh no! Squid error!</h4>;
 };

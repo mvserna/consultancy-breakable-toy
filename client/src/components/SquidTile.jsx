@@ -1,13 +1,13 @@
 import React from "react";
 
 export const SquidTile = ({ squid }) => {
-  const rowColor = squid.id % 2 === 0 ? "squid-table__square--blue" : "";
+  const rowColor = squid.id % 2 === 0 ? "squid-table__cell--blue" : "";
   return (
-    <>
-      <li className={`squid-table__square ${rowColor}`}>{squid.name}</li>
-      <li className={`squid-table__square ${rowColor}`}>{squid.species}</li>
-      <li className={`squid-table__square ${rowColor}`}>{squid.specialPower}</li>
-      <li className={`squid-table__square ${rowColor}`}>{squid.xp}</li>
-    </>
+    <tr>
+      <td className={`squid-table__cell ${rowColor}`}>{squid.name}</td>
+      <td className={`squid-table__cell ${rowColor}`}>{squid.species}</td>
+      <td className={`squid-table__cell ${rowColor}`}>{squid.specialPower}</td>
+      <td className={`squid-table__cell ${rowColor}`}>{squid.xp}</td>
+    </tr>
   );
 };
