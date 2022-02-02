@@ -19,4 +19,18 @@
   & .squid-table__cell--blue {
     @apply bg-blue-50;
   }
+
+  & .squid-table__footer {
+    @apply text-center;
+  }
+
+  & .squid-table__footer-cell {
+    @apply px-2;
+    @apply text-xs text-gray-500;
+    @apply hover:text-black hover:font-bold hover:cursor-pointer;
+  }
+
+  & .squid-table__footer-cell > select {
+    @apply border-none outline-none;
+  }
 }
