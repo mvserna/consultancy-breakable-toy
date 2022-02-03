@@ -1,6 +1,8 @@
 import React from "react";
 
-export const SquidTile = ({ squid }) => {
+import "./styles/squid-row.pcss";
+
+export const SquidRow = ({ squid }) => {
   const rowColor = squid.id % 2 === 0 ? "squid-table__cell--blue" : "";
   return (
     <tr>

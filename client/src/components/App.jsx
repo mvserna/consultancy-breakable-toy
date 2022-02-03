@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { TopBar } from "./layout/TopBar";
 import "../style/main.pcss";
-import { SquidIndexPage } from "./SquidIndexPage";
+import { SquidIndexPage } from "./squidIndex/SquidIndexPage";
 
 const App = () => {
   /*
