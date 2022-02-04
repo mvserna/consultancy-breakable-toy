@@ -1,0 +1,29 @@
+.squid-table {
+  @apply mx-auto my-8;
+  @apply table-auto;
+  @apply w-4/5;
+
+  & .squid-table__header {
+    @apply p-2;
+    @apply font-bold;
+    @apply text-center;
+    @apply bg-blue-50;
+    @apply border-b-2;
+  }
+
+  & .squid-table__footer {
+    @apply text-center;
+  }
+
+  & .squid-table__footer-button {
+    @apply px-2;
+    @apply text-xs text-gray-500;
+    @apply hover:text-black hover:font-bold hover:cursor-pointer;
+  }
+
+  & .squid-table__footer-select {
+    @apply border-none outline-none;
+    @apply text-sm text-gray-500;
+    @apply hover:text-black hover:font-bold hover:cursor-pointer;
+  }
+}
