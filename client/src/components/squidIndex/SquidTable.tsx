@@ -10,7 +10,7 @@ const squidHeadings = ["Name", "Species", "Special Power", "XP"];
 
 export const SquidTable = ({ squidData: { squids, pageCount }, currentPage, setCurrentPage }) => {
   const queryClient = useQueryClient();
-  const refetchHandler = async () => {
+  const refetchHandler = async (): Promise<void> => {
     await queryClient.invalidateQueries(["squids"]);
   };
 
