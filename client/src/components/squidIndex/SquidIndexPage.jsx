@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useGetSquids } from "./hooks/useGetSquids";
+import { SquidForm } from "./SquidForm";
 import { SquidTable } from "./SquidTable";
 
 export const SquidIndexPage = () => {
@@ -17,7 +18,14 @@ export const SquidIndexPage = () => {
   }
   if (isSquidQuerySuccess) {
     return (
-      <SquidTable squidData={squidData} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <>
+        <SquidForm specialPowers={squidData.specialPowers} />
+        <SquidTable
+          squidData={squidData}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </>
     );
   }
   return <h4>Oh no! Squid error!</h4>;
