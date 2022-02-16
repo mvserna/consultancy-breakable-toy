@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
@@ -6,7 +6,7 @@ import { useMutation } from "react-query";
 import "./styles/squid-form.pcss";
 import { ApiClient } from "../../backend/ApiClient";
 
-export const SquidForm = ({ specialPowers }) => {
+export const SquidForm: FC<{ specialPowers: string[] }> = ({ specialPowers }) => {
   const {
     register,
     handleSubmit,

@@ -1,23 +1,29 @@
-import React from "react";
+import React, { FC, ReactEventHandler } from "react";
 
 import { FaSync } from "react-icons/fa";
 import { useQueryClient } from "react-query";
 
+import { QueryResponse } from "./hooks/useGetSquids";
 import { SquidRow } from "./SquidRow";
 import "./styles/squid-table.pcss";
 
 const squidHeadings = ["Name", "Species", "Special Power", "XP"];
 
-export const SquidTable = ({ squidData: { squids, pageCount }, currentPage, setCurrentPage }) => {
+export const SquidTable: FC<{
+  squidData: SquidData;
+  currentPage: number;
+  // setCurrentPage: (pageNumber: number) => void;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}> = ({ squidData: { squids, pageCount }, currentPage, setCurrentPage }) => {
   const queryClient = useQueryClient();
   const refetchHandler = async (): Promise<void> => {
     await queryClient.invalidateQueries(["squids"]);
   };
 
   const changePageHandler = {
-    first: () => setCurrentPage(1),
-    previous: () => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1),
-    select: (e) => setCurrentPage(e.currentTarget.value),
+    first: (): void => setCurrentPage(1),
+    previous: (): void => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1),
+    select: (e): void => setCurrentPage(e.currentTarget.value),
     next: () => setCurrentPage(currentPage < pageCount ? currentPage + 1 : pageCount),
     last: () => setCurrentPage(pageCount),
   };
