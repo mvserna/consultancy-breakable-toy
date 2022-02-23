@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
 
 import "./styles/squid-form.pcss";
-import { ApiClient } from "../../backend/ApiClient";
+import { SquidFormValues } from "../../types/SquidShape";
+import { usePostSquids } from "./hooks/usePostSquids";
 
 export const SquidForm: FC<{ specialPowers: string[] }> = ({ specialPowers }) => {
   const {
@@ -13,12 +13,14 @@ export const SquidForm: FC<{ specialPowers: string[] }> = ({ specialPowers }) =>
     formState: { errors },
   } = useForm();
 
-  const { mutate } = useMutation((reqSquid) =>
-    ApiClient.post("/squids", reqSquid).then((res) => res.data)
-  );
+  const { mutate } = usePostSquids();
+
+  const mutateSquids = (data: SquidFormValues): void => {
+    mutate(data);
+  };
 
   return (
-    <form onSubmit={handleSubmit(mutate)} className="squid-form">
+    <form onSubmit={handleSubmit(mutateSquids)} className="squid-form">
       <h4 className="squid-form__header">Create a new squid:</h4>
       <label htmlFor="name" className="squid-form__text">
         <span>Name: </span>

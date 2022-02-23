@@ -1,18 +1,18 @@
-import React, { FC, ReactEventHandler } from "react";
+import React, { FC } from "react";
 
 import { FaSync } from "react-icons/fa";
 import { useQueryClient } from "react-query";
 
-import { QueryResponse } from "./hooks/useGetSquids";
+import { SquidData } from "../../types/SquidShape";
+import { PaginationRow } from "./PaginationRow";
 import { SquidRow } from "./SquidRow";
 import "./styles/squid-table.pcss";
 
-const squidHeadings = ["Name", "Species", "Special Power", "XP"];
+export const squidHeadings = ["Name", "Species", "Special Power", "XP"];
 
 export const SquidTable: FC<{
   squidData: SquidData;
   currentPage: number;
-  // setCurrentPage: (pageNumber: number) => void;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ squidData: { squids, pageCount }, currentPage, setCurrentPage }) => {
   const queryClient = useQueryClient();
@@ -20,57 +20,18 @@ export const SquidTable: FC<{
     await queryClient.invalidateQueries(["squids"]);
   };
 
-  const changePageHandler = {
-    first: (): void => setCurrentPage(1),
-    previous: (): void => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1),
-    select: (e): void => setCurrentPage(e.currentTarget.value),
-    next: () => setCurrentPage(currentPage < pageCount ? currentPage + 1 : pageCount),
-    last: () => setCurrentPage(pageCount),
-  };
-
-  const pageOptions = [...Array(pageCount)].map((e, i) => (
-    // eslint-disable-next-line react/no-array-index-key
-    <option key={i} value={i + 1}>
-      {i + 1}
-    </option>
-  ));
-
   const squidHeaderComponents = squidHeadings.map((heading) => (
     <th key={heading} className="squid-table__header">
       {heading}
     </th>
   ));
   const squidRowComponents = squids.map((squid) => <SquidRow key={squid.id} squid={squid} />);
-  const squidPaginationButtons = Object.keys(changePageHandler).map((key) => {
-    if (key === "select") {
-      return (
-        <select
-          key={key}
-          className="squid-table__footer-select"
-          value={currentPage}
-          onChange={changePageHandler.select}
-        >
-          {pageOptions}
-        </select>
-      );
-    }
-    return (
-      <button
-        key={key}
-        type="button"
-        className="squid-table__footer-button"
-        onClick={changePageHandler[key]}
-      >
-        {key}
-      </button>
-    );
-  });
 
   return (
     <table className="squid-table">
       <thead>
         <tr>
-          <th className="squid-table__header-refetch" colSpan="4">
+          <th className="squid-table__header-refetch" colSpan={squidHeadings.length}>
             <button className="squid-table__header-button" type="button" onClick={refetchHandler}>
               <FaSync />
             </button>
@@ -80,11 +41,11 @@ export const SquidTable: FC<{
       </thead>
       <tbody>{squidRowComponents}</tbody>
       <tfoot>
-        <tr>
-          <td className="squid-table__footer" colSpan="4">
-            {squidPaginationButtons}
-          </td>
-        </tr>
+        <PaginationRow
+          pageCount={pageCount}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </tfoot>
     </table>
   );
