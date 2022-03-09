@@ -11,10 +11,7 @@ export const SquidShowPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data: squid, isLoading, isSuccess } = useGetSquid(id);
   const birthdayDate = squid ? new Date(squid?.birthDate) : null;
-
-  console.log("birthdayDate", birthdayDate);
   const signDetails = useFindBirthSign(birthdayDate);
-  console.log("signDetails", signDetails);
 
   if (isLoading) {
     return <h4>Standby while your squid is summoned...</h4>;

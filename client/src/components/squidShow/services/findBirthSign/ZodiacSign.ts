@@ -1,4 +1,4 @@
-import { BirthSignDetails } from "../../../types/SignShape";
+import { BirthSignDetails } from "../../../../types/SignShape";
 
 export class ZodiacSign {
   title: string;
