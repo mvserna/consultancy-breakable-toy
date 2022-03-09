@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
+import { formatISO } from "date-fns";
 import Faker from "faker";
 import { Factory } from "rosie";
 
@@ -38,10 +39,18 @@ const getRandomSpecialPower = () => {
   return squidPowers[randomIndex(squidPowers)];
 };
 
+const getRandomBirthDate = () => {
+  const startDate = Date.UTC(1980, 0, 1);
+  const endDate = Date.UTC(2022, 0, 1);
+  const rawDate = startDate + Math.random() * (endDate - startDate);
+  return formatISO(new Date(rawDate), { representation: "date" });
+};
+
 Factory.define("Squid", Squid)
   .sequence("id")
   .attr("name", Faker.name.firstName)
   .attr("species", getRandomSpecies)
-  .attr("specialPower", getRandomSpecialPower);
+  .attr("specialPower", getRandomSpecialPower)
+  .attr("birthDate", getRandomBirthDate);
 
 export { Factory };

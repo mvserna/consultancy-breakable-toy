@@ -1,12 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 
-export const PaginationRow = ({ pageCount, currentPage, setCurrentPage }) => {
+import { squidHeadings } from "./SquidTable";
+
+export const PaginationRow: FC<{
+  pageCount: number;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}> = ({ pageCount, currentPage, setCurrentPage }) => {
   const changePageHandler = {
-    first: () => setCurrentPage(1),
-    previous: () => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1),
-    select: (e) => setCurrentPage(e.currentTarget.value),
-    next: () => setCurrentPage(currentPage < pageCount ? currentPage + 1 : pageCount),
-    last: () => setCurrentPage(pageCount),
+    first: (): void => setCurrentPage(1),
+    previous: (): void => setCurrentPage(currentPage > 1 ? currentPage - 1 : 1),
+    select: (e: React.BaseSyntheticEvent): void => setCurrentPage(e.currentTarget.value),
+    next: (): void => setCurrentPage(currentPage < pageCount ? currentPage + 1 : pageCount),
+    last: (): void => setCurrentPage(pageCount),
   };
 
   const pageOptions = [...Array(pageCount)].map((e, i) => (
@@ -43,7 +49,7 @@ export const PaginationRow = ({ pageCount, currentPage, setCurrentPage }) => {
 
   return (
     <tr>
-      <td className="squid-table__footer" colSpan="4">
+      <td className="squid-table__footer" colSpan={squidHeadings.length}>
         {paginationButtons}
       </td>
     </tr>

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 import { useGetSquids } from "./hooks/useGetSquids";
 import { SquidForm } from "./SquidForm";
 import { SquidTable } from "./SquidTable";
 
-export const SquidIndexPage = () => {
+export const SquidIndexPage: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const {

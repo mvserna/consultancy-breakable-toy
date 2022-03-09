@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/order
 import { hot } from "react-hot-loader/root";
 // eslint-disable-next-line import/order
-import React from "react";
+import React, { FC } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -9,8 +9,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { TopBar } from "./layout/TopBar";
 import "../style/main.pcss";
 import { SquidIndexPage } from "./squidIndex/SquidIndexPage";
+import { SquidShowPage } from "./squidShow/SquidShowPage";
 
-const App = () => {
+const App: FC = () => {
   /*
   Defaults:
   - retry: false because we don't want to retry on network errors
@@ -27,6 +28,7 @@ const App = () => {
         <TopBar />
         <Switch>
           <Route exact path="/" component={SquidIndexPage} />
+          <Route exact path="/squids/:id" component={SquidShowPage} />
         </Switch>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} />
